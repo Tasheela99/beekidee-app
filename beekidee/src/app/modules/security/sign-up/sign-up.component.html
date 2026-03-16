@@ -1,0 +1,96 @@
+<div class="signup-container">
+  <div class="floating-elements">
+    <div class="cloud cloud-1">☁️</div>
+    <div class="cloud cloud-2">☁️</div>
+    <div class="cloud cloud-3">☁️</div>
+    <div class="star star-1">⭐</div>
+    <div class="star star-2">⭐</div>
+    <div class="star star-3">⭐</div>
+    <div class="balloon balloon-1">🎈</div>
+    <div class="balloon balloon-2">🎈</div>
+  </div>
+
+  <div class="signup-card">
+    <div class="header">
+      <div class="mascot">
+        <div class="mascot-animal">{{ animals[currentAnimal] }}</div>
+      </div>
+      <h1 class="title">
+        <span class="letter" style="animation-delay: 0.1s">W</span>
+        <span class="letter" style="animation-delay: 0.2s">e</span>
+        <span class="letter" style="animation-delay: 0.3s">l</span>
+        <span class="letter" style="animation-delay: 0.4s">c</span>
+        <span class="letter" style="animation-delay: 0.5s">o</span>
+        <span class="letter" style="animation-delay: 0.6s">m</span>
+        <span class="letter" style="animation-delay: 0.7s">e</span>
+        <span class="letter" style="animation-delay: 0.8s">!</span>
+      </h1>
+    </div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+      <div class="form-group">
+        <label for="displayName" class="form-label">What's your name?</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🧒</span>
+          <input type="text" id="displayName" formControlName="displayName" class="form-input"
+            [class.error]="getFieldError('displayName')" placeholder="Enter your awesome name!" />
+        </div>
+        <div class="error-message" *ngIf="getFieldError('displayName')">
+          {{ getFieldError('displayName') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Parent's email address</label>
+        <div class="input-wrapper">
+          <span class="input-icon">📧</span>
+          <input type="email" id="email" formControlName="email" class="form-input" [class.error]="getFieldError('email')"
+            placeholder="parent@example.com" />
+        </div>
+        <div class="error-message" *ngIf="getFieldError('email')">
+          {{ getFieldError('email') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber" class="form-label">Parent's phone number</label>
+        <div class="input-wrapper">
+          <span class="input-icon">📱</span>
+          <input type="tel" id="phoneNumber" formControlName="phoneNumber" class="form-input"
+            [class.error]="getFieldError('phoneNumber')" placeholder="1234567890" />
+        </div>
+        <div class="error-message" *ngIf="getFieldError('phoneNumber')">
+          {{ getFieldError('phoneNumber') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Create a secret password</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🔐</span>
+          <input [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password" class="form-input"
+            [class.error]="getFieldError('password')" placeholder="Make it super secret!" />
+          <button type="button" class="password-toggle" (click)="hidePassword = !hidePassword">
+            {{ hidePassword ? '🙈' : '👁️' }}
+          </button>
+        </div>
+        <div class="error-message" *ngIf="getFieldError('password')">
+          {{ getFieldError('password') }}
+        </div>
+      </div>
+
+      <button type="submit" class="signup-button" [disabled]="signupForm.invalid">
+        <span class="button-text">🚀 Let's Play!</span>
+      </button>
+    </form>
+
+    <div class="signin-link">
+      <p>Already have an account?
+        <a href="#" class="signin-button" routerLink="/security/sign-in">
+          <span class="icon">🎪</span>
+          Sign In Here!
+        </a>
+      </p>
+    </div>
+  </div>
+</div>

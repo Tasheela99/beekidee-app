@@ -1,0 +1,70 @@
+<div class="container-fluid my-2">
+  <div class="row">
+    <div class="col-12 w-100 d-flex align-items-center justify-content-between">
+      <h4 class="m-0 p-0 fw-bold">Learning Materials</h4>
+      <button mat-raised-button color="primary" class="bg-primary text-white" (click)="openPopUp('0ms','0ms')">Add Material</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 my-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table cdk-table [dataSource]="dataSource" class="full-width-table">
+
+          <!-- Title Column -->
+          <ng-container cdkColumnDef="title">
+            <th cdk-header-cell *cdkHeaderCellDef> Title </th>
+            <td cdk-cell *cdkCellDef="let lesson"> {{ lesson.title }} </td>
+          </ng-container>
+
+          <!-- Subject Column -->
+          <ng-container cdkColumnDef="subject">
+            <th cdk-header-cell *cdkHeaderCellDef> Subject </th>
+            <td cdk-cell *cdkCellDef="let lesson"> {{ lesson.subject }} </td>
+          </ng-container>
+
+          <!-- Level Column -->
+          <ng-container cdkColumnDef="level">
+            <th cdk-header-cell *cdkHeaderCellDef> Level </th>
+            <td cdk-cell *cdkCellDef="let lesson"> {{ lesson.level }} </td>
+          </ng-container>
+
+          <!-- Type Column -->
+          <ng-container cdkColumnDef="type">
+            <th cdk-header-cell *cdkHeaderCellDef> Type </th>
+            <td cdk-cell *cdkCellDef="let lesson"> {{ lesson.type }} </td>
+          </ng-container>
+
+          <!-- Created At Column -->
+          <ng-container cdkColumnDef="createdAt">
+            <th cdk-header-cell *cdkHeaderCellDef> Created At </th>
+            <td cdk-cell *cdkCellDef="let lesson"> {{ lesson.createdAt | date:'short' }} </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container cdkColumnDef="actions">
+            <th cdk-header-cell *cdkHeaderCellDef> Actions </th>
+            <td cdk-cell *cdkCellDef="let lesson">
+              <button mat-icon-button>
+                <a [href]="lesson.lessonUrl" target="_blank"><mat-icon color="primary">visibility</mat-icon></a>
+              </button>
+              <button mat-icon-button (click)="delete(lesson)">
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+          <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

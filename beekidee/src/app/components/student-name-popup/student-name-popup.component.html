@@ -1,0 +1,78 @@
+<div class="popup-overlay">
+  <div class="popup-container">
+    <div class="popup-header">
+      <h2>✨ Enter Kid's Details ✨</h2>
+    </div>
+
+    <div class="popup-content">
+      <form [formGroup]="popupForm">
+        <div class="input-container">
+          <div class="nebula-input">
+            <input
+              id="student-name"
+              formControlName="studentName"
+              autocomplete="off"
+              required
+              class="input"
+              type="text"
+              placeholder=" "
+              (keypress)="onKeyPress($event)"
+            />
+            <label class="user-label">Student Name</label>
+            <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+            <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+            <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+            <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+            <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+            <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+          </div>
+
+          <div class="nebula-input">
+            <select
+              id="round-number"
+              formControlName="roundNumber"
+              autocomplete="off"
+              required
+              class="input"
+            >
+              <option value="" disabled selected>Select Round</option>
+              <option value="001">001</option>
+              <option value="002">002</option>
+            </select>
+            <label class="user-label">Round Number</label>
+            <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+            <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+            <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+            <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+            <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+            <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+          </div>
+        </div>
+
+        <div class="button-container">
+          <button
+            type="button"
+            class="animated-button"
+            (click)="submitDetails()"
+            [disabled]="popupForm.invalid">
+            <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
+              <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+            </svg>
+            <span class="text">Submit!</span>
+            <span class="circle"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
+              <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            class="boton-elegante"
+            (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

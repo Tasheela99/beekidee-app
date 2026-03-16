@@ -1,0 +1,158 @@
+<h2 mat-dialog-title>Student Details: {{data.studentId}} - Session {{data.sessionNumber}}</h2>
+<mat-dialog-content>
+  <!-- Average Data Cards -->
+  <div class="averages-container">
+    <div class="stats-header">
+      <h3>Session Averages ({{averageData.totalRecords}} records)</h3>
+    </div>
+
+    <div class="cards-grid">
+      <!-- Overall Attention Card -->
+      <mat-card class="stat-card" [ngClass]="getAttentionColor(averageData.overall_attention)">
+        <mat-card-content>
+          <div class="card-header">
+            <mat-icon>visibility</mat-icon>
+            <span class="card-title">Overall Attention</span>
+          </div>
+          <div class="card-value">
+            {{averageData.overall_attention | number:'1.1-1'}}%
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Eye Attention Card -->
+      <mat-card class="stat-card" [ngClass]="getAttentionColor(averageData.eye_attention)">
+        <mat-card-content>
+          <div class="card-header">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span class="card-title">Eye Attention</span>
+          </div>
+          <div class="card-value">
+            {{averageData.eye_attention | number:'1.1-1'}}%
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Face Attention Card -->
+      <mat-card class="stat-card" [ngClass]="getAttentionColor(averageData.face_attention)">
+        <mat-card-content>
+          <div class="card-header">
+            <mat-icon>face</mat-icon>
+            <span class="card-title">Face Attention</span>
+          </div>
+          <div class="card-value">
+            {{averageData.face_attention | number:'1.1-1'}}%
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Noise Attention Card -->
+      <mat-card class="stat-card" [ngClass]="getAttentionColor(averageData.noise_attention)">
+        <mat-card-content>
+          <div class="card-header">
+            <mat-icon>volume_up</mat-icon>
+            <span class="card-title">Noise Attention</span>
+          </div>
+          <div class="card-value">
+            {{averageData.noise_attention | number:'1.1-1'}}%
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Posture Card -->
+      <mat-card class="stat-card" [ngClass]="getPostureColor(averageData.posture)">
+        <mat-card-content>
+          <div class="card-header">
+            <mat-icon>accessibility</mat-icon>
+            <span class="card-title">Avg Posture</span>
+          </div>
+          <div class="card-value">
+            {{averageData.posture | number:'1.1-2'}}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <div class="table-container">
+    <h3>Detailed Session Data</h3>
+    <table mat-table [dataSource]="dataSource" class="example-table">
+      <!-- Timestamp Column -->
+      <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef>Timestamp</th>
+        <td mat-cell *matCellDef="let session">{{session.timestamp * 1000 | date:'medium'}}</td>
+      </ng-container>
+
+      <!-- Emotion Column -->
+      <ng-container matColumnDef="emotion">
+        <th mat-header-cell *matHeaderCellDef>Emotion</th>
+        <td mat-cell *matCellDef="let session">
+          <span class="emotion-badge" [ngClass]="'emotion-' + session.emotion.toLowerCase()">
+            {{session.emotion}}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Overall Attention Column -->
+      <ng-container matColumnDef="overall_attention">
+        <th mat-header-cell *matHeaderCellDef>Overall Attention</th>
+        <td mat-cell *matCellDef="let session">
+          <span class="attention-value" [ngClass]="getAttentionColor(session.overall_attention)">
+            {{session.overall_attention | number:'1.1-1'}}%
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Eye Attention Column -->
+      <ng-container matColumnDef="eye_attention">
+        <th mat-header-cell *matHeaderCellDef>Eye Attention</th>
+        <td mat-cell *matCellDef="let session">
+          <span class="attention-value" [ngClass]="getAttentionColor(session.eye_attention)">
+            {{session.eye_attention | number:'1.1-1'}}%
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Face Attention Column -->
+      <ng-container matColumnDef="face_attention">
+        <th mat-header-cell *matHeaderCellDef>Face Attention</th>
+        <td mat-cell *matCellDef="let session">
+          <span class="attention-value" [ngClass]="getAttentionColor(session.face_attention)">
+            {{session.face_attention | number:'1.1-1'}}%
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Noise Attention Column -->
+      <ng-container matColumnDef="noise_attention">
+        <th mat-header-cell *matHeaderCellDef>Noise Attention</th>
+        <td mat-cell *matCellDef="let session">
+          <span class="attention-value" [ngClass]="getAttentionColor(session.noise_attention)">
+            {{session.noise_attention | number:'1.1-1'}}%
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Posture Column -->
+      <ng-container matColumnDef="posture">
+        <th mat-header-cell *matHeaderCellDef>Posture</th>
+        <td mat-cell *matCellDef="let session">
+          <span class="posture-value" [ngClass]="getPostureColor(session.posture)">
+            {{session.posture | number:'1.1-2'}}
+          </span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div *ngIf="dataSource.data.length === 0" class="no-data">
+      <mat-icon>info</mat-icon>
+      <p>No session data available.</p>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onClose()">Close</button>
+</mat-dialog-actions>

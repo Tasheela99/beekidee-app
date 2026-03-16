@@ -1,0 +1,68 @@
+<div class="background-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+
+<div class="signin-form-container">
+    <div class="fun-elements">🌟</div>
+    <div class="fun-elements2">🎨</div>
+
+    <div class="header">
+        <div class="logo">📚</div>
+        <h1 class="title">Welcome Little Friends!</h1>
+        <p class="subtitle">Let's learn and have fun together!</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="signin-form">
+        <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <div class="input-wrapper">
+                <span class="input-icon">📧</span>
+                <input type="email" id="email" formControlName="email" class="form-input" placeholder="your@email.com" />
+            </div>
+            <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="error-message">
+                We need your email!
+            </div>
+            <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error-message">
+                That doesn't look like an email
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-wrapper">
+                <span class="input-icon">🔐</span>
+                <input [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password" class="form-input" placeholder="Enter your password" />
+                <button type="button" class="password-toggle" (click)="hidePassword = !hidePassword">
+                    {{ hidePassword ? '🙈' : '👁️' }}
+                </button>
+            </div>
+            <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" class="error-message">
+                Don't forget your secret word!
+            </div>
+            <div *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched" class="error-message">
+                Make it longer (at least 6 letters)
+            </div>
+        </div>
+
+        <button type="submit" class="login-btn" [disabled]="loginForm.invalid">
+            🚀 Let's Go!
+        </button>
+
+        <button type="button" class="signup-btn" routerLink="/security/sign-up">
+            ✨ Join Our Fun!
+        </button>
+    </form>
+</div>
+<div class="background-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>

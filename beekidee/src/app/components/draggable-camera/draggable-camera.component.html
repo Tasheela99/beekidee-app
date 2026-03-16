@@ -1,0 +1,18 @@
+<div
+  class="camera-container"
+  cdkDrag
+  [class.active]="isActive"
+  *ngIf="showCamera">
+  <div class="camera-header" cdkDragHandle>
+    <span>Camera</span>
+    <div class="camera-controls">
+      <button mat-icon-button (click)="toggleCamera()">
+        <mat-icon>{{ isActive ? 'videocam' : 'videocam_off' }}</mat-icon>
+      </button>
+      <button mat-icon-button (click)="closeCamera()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <video #videoElement [class.hidden]="!isActive"></video>
+</div>

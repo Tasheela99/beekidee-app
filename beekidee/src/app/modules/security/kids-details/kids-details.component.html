@@ -1,0 +1,98 @@
+<div class="m-0 p-0 container-fluid full-page">
+  <div class="row h-100 m-0 g-0">
+    <!-- Left Column - Kid's Form -->
+    <div class="col-12 col-md-6 p-0 d-flex align-items-center justify-content-center bee-left-form">
+      <mat-card class="login-card">
+        <mat-card-header class="mb-4 text-center">
+          <mat-card-title class="header-text">Add Your Little Friend!</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="text-center">
+          <p class="intro-text">Tell us about your child to make their adventure special!</p>
+          <form [formGroup]="kidForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-12 text-center">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Child's Name</mat-label>
+                  <input matInput formControlName="name">
+                  <mat-icon matSuffix class="icon">face</mat-icon>
+                  <mat-error *ngIf="kidForm.controls['name'].hasError('required')">
+                    We need their name!
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12 text-center">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Age</mat-label>
+                  <input matInput type="number" formControlName="age">
+                  <mat-icon matSuffix class="icon">cake</mat-icon>
+                  <mat-error *ngIf="kidForm.controls['age'].hasError('required')">
+                    Age is required!
+                  </mat-error>
+                  <mat-error *ngIf="kidForm.controls['age'].hasError('min')">
+                    Age must be at least 1
+                  </mat-error>
+                  <mat-error *ngIf="kidForm.controls['age'].hasError('max')">
+                    Age must be 17 or under
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12 text-center">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Gender</mat-label>
+                  <mat-select formControlName="gender">
+                    <mat-option value="male">Male</mat-option>
+                    <mat-option value="female">Female</mat-option>
+                    <mat-option value="other">Other</mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix class="icon">wc</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="col-12 text-center">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Grade Level</mat-label>
+                  <mat-select formControlName="gradeLevel">
+                    <mat-option value="preschool">Preschool</mat-option>
+                    <mat-option value="kindergarten">Kindergarten</mat-option>
+                    <mat-option value="grade1">Grade 1</mat-option>
+                    <mat-option value="grade2">Grade 2</mat-option>
+                    <mat-option value="grade3">Grade 3</mat-option>
+                    <mat-option value="grade4">Grade 4</mat-option>
+                    <mat-option value="grade5">Grade 5</mat-option>
+                    <mat-option value="grade6">Grade 6</mat-option>
+                    <mat-option value="grade7">Grade 7</mat-option>
+                    <mat-option value="grade8">Grade 8</mat-option>
+                    <mat-option value="grade9">Grade 9</mat-option>
+                    <mat-option value="grade10">Grade 10</mat-option>
+                    <mat-option value="grade11">Grade 11</mat-option>
+                    <mat-option value="grade12">Grade 12</mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix class="icon">school</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="col-12 text-center">
+                <button mat-raised-button class="example-full-width login-btn" type="submit"
+                        [disabled]="kidForm.invalid || isSubmitting">
+                  <mat-icon *ngIf="isSubmitting">
+                    <mat-spinner diameter="24"></mat-spinner>
+                  </mat-icon>
+                  <span *ngIf="!isSubmitting">Save Details</span>
+                  <span *ngIf="isSubmitting">Saving...</span>
+                </button>
+              </div>
+              <div class="col-12 my-2 text-center">
+                <button mat-raised-button class="example-full-width register-btn"
+                        routerLink="/console" [disabled]="isSubmitting">
+                  Go to Dashboard
+                </button>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Right Column - Branding Image -->
+    <div class="col-12 col-md-6 p-0 d-none d-md-flex branding-column align-items-center justify-content-center">
+    </div>
+  </div>
+</div>

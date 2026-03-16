@@ -1,0 +1,405 @@
+<div class="outer">
+  <div class="inner container-fluid">
+    <div class="example-container">
+      <!-- Statistics Cards -->
+      <div class="stats-container">
+        <mat-card class="stat-card border-3 border border-primary bg-white">
+          <mat-card-content>
+            <h3 class="fw-normal">Total Students</h3>
+            <h2 class="fw-bolder">{{ debugInfo.session001Count + debugInfo.session002Count }}</h2>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="stat-card border-3 border border-success bg-white">
+          <mat-card-content>
+            <h3 class="fw-normal">Session 001</h3>
+            <h2 class="fw-bolder">{{ debugInfo.session001Count }}</h2>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="stat-card border-3 border border-warning bg-white">
+          <mat-card-content>
+            <h3 class="fw-normal">Session 002</h3>
+            <h2 class="fw-bolder">{{ debugInfo.session002Count }}</h2>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Debug Panel -->
+<!--      <mat-card class="bg-white border border-6 border-black p-3 mb-4">-->
+<!--        <div class="debug-panel">-->
+<!--          <h4>Session Info:</h4>-->
+<!--          <p>Session 001 Loaded: ({{ debugInfo.session001Count }} records)</p>-->
+<!--          <p>Session 002 Loaded: ({{ debugInfo.session002Count }} records)</p>-->
+<!--          <p *ngIf="debugInfo.lastError">Last Error: {{ debugInfo.lastError }}</p>-->
+<!--          <button mat-raised-button color="accent" (click)="refreshData()">Refresh Data</button>-->
+<!--          <button mat-raised-button color="primary" (click)="exportData()" style="margin-left: 10px;">-->
+<!--            <mat-icon>file_download</mat-icon>-->
+<!--            Export Data-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </mat-card>-->
+
+      <!-- Progress Analysis Section -->
+      <mat-card class="bg-white border border-2 border-info p-3 mb-4">
+        <mat-card-header>
+          <mat-card-title class="d-flex align-items-center justify-content-between w-100">
+            <span class="d-flex align-items-center">
+              <mat-icon class="me-2 text-info">analytics</mat-icon>
+              Student Progress Analysis (Session 001 vs 002)
+            </span>
+            <button mat-icon-button (click)="toggleProgressSection()" [attr.aria-expanded]="showProgressSection">
+              <mat-icon>{{ showProgressSection ? 'expand_less' : 'expand_more' }}</mat-icon>
+            </button>
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content [class.d-block]="showProgressSection" [class.d-none]="!showProgressSection">
+          <!-- Progress Statistics Cards -->
+          <div class="row mb-4">
+            <div class="col-md-3 col-sm-6 mb-3">
+              <div class="card border-primary h-100">
+                <div class="card-body text-center">
+                  <mat-icon class="text-primary mb-2" style="font-size: 2rem;">group</mat-icon>
+                  <h5 class="card-title text-primary">{{ progressStats.totalStudents }}</h5>
+                  <p class="card-text small">Total Unique Students</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 mb-3">
+              <div class="card border-success h-100">
+                <div class="card-body text-center">
+                  <mat-icon class="text-success mb-2" style="font-size: 2rem;">trending_up</mat-icon>
+                  <h5 class="card-title text-success">{{ progressStats.improvedStudents }}</h5>
+                  <p class="card-text small">Students Improved</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 mb-3">
+              <div class="card border-warning h-100">
+                <div class="card-body text-center">
+                  <mat-icon class="text-warning mb-2" style="font-size: 2rem;">trending_down</mat-icon>
+                  <h5 class="card-title text-warning">{{ progressStats.declinedStudents }}</h5>
+                  <p class="card-text small">Students Declined</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 mb-3">
+              <div class="card border-info h-100">
+                <div class="card-body text-center">
+                  <mat-icon class="text-info mb-2" style="font-size: 2rem;">person_add</mat-icon>
+                  <h5 class="card-title text-info">{{ progressStats.newStudentsInSession002 }}</h5>
+                  <p class="card-text small">New in Session 002</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Statistics Row -->
+          <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+              <div class="card border-secondary h-100">
+                <div class="card-body text-center">
+                  <mat-icon class="text-secondary mb-2" style="font-size: 1.5rem;">compare_arrows</mat-icon>
+                  <h6 class="card-title">{{ progressStats.studentsInBothSessions }}</h6>
+                  <p class="card-text small">Students in Both Sessions</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+              <div class="card border-danger h-100">
+                <div class="card-body text-center">
+                  <mat-icon class="text-danger mb-2" style="font-size: 1.5rem;">person_remove</mat-icon>
+                  <h6 class="card-title">{{ progressStats.droppedStudentsFromSession001 }}</h6>
+                  <p class="card-text small">Dropped from Session 001</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+              <div class="card border-primary h-100">
+                <div class="card-body text-center">
+                  <mat-icon class="text-primary mb-2" style="font-size: 1.5rem;">percent</mat-icon>
+                  <h6 class="card-title">{{ progressStats.averageProgressRate | number:'1.1-1' }}%</h6>
+                  <p class="card-text small">Improvement Rate</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Filter -->
+          <div class="row mb-3">
+            <div class="col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Search Student Progress</mat-label>
+                <input matInput (keyup)="applyProgressFilter($event)" placeholder="Enter student ID">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Progress Table -->
+          <div class="table-container mat-elevation-z2" *ngIf="progressDataSource.data.length > 0">
+            <table mat-table [dataSource]="progressDataSource" class="example-table w-100" matSort
+                   #progressSort="matSort"
+                   matSortActive="studentId" matSortDirection="asc">
+              <!-- Student ID Column -->
+              <ng-container matColumnDef="studentId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Student Name</th>
+                <td mat-cell *matCellDef="let row" class="clickable-cell fw-bold">
+                  {{ row.studentId }}
+                </td>
+              </ng-container>
+
+              <!-- Session 001 Status Column -->
+              <ng-container matColumnDef="session001Status">
+                <th mat-header-cell *matHeaderCellDef>Session 001</th>
+                <td mat-cell *matCellDef="let row">
+                  <span *ngIf="row.hasSession001" class="badge bg-success d-flex align-items-center justify-content-center">
+                    <mat-icon class="small-icon me-1">check_circle</mat-icon>
+                    Participated
+                  </span>
+                  <span *ngIf="!row.hasSession001" class="badge bg-secondary d-flex align-items-center justify-content-center">
+                    <mat-icon class="small-icon me-1">remove_circle</mat-icon>
+                    Not Participated
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Session 002 Status Column -->
+              <ng-container matColumnDef="session002Status">
+                <th mat-header-cell *matHeaderCellDef>Session 002</th>
+                <td mat-cell *matCellDef="let row">
+                  <span *ngIf="row.hasSession002" class="badge bg-success d-flex align-items-center justify-content-center">
+                    <mat-icon class="small-icon me-1">check_circle</mat-icon>
+                    Participated
+                  </span>
+                  <span *ngIf="!row.hasSession002" class="badge bg-secondary d-flex align-items-center justify-content-center">
+                    <mat-icon class="small-icon me-1">remove_circle</mat-icon>
+                    Not Participated
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Progress Status Column -->
+              <ng-container matColumnDef="progressStatus">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Progress Status</th>
+                <td mat-cell *matCellDef="let row">
+                  <span class="badge d-flex align-items-center justify-content-center"
+                        [class.bg-success]="row.progressStatus === 'improved'"
+                        [class.bg-warning]="row.progressStatus === 'declined'"
+                        [class.bg-info]="row.progressStatus === 'same'"
+                        [class.bg-primary]="row.progressStatus === 'new'"
+                        [class.bg-secondary]="row.progressStatus === 'incomplete'">
+                    <mat-icon class="small-icon me-1">{{ getProgressStatusIcon(row.progressStatus) }}</mat-icon>
+                    {{ getProgressStatusText(row.progressStatus) }}
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Actions Column -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let row">
+                  <button mat-icon-button
+                          (click)="openProgressDialog(row.studentId)"
+                          matTooltip="View Student Details"
+                          class="text-primary">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="progressDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: progressDisplayedColumns;"></tr>
+            </table>
+
+            <!-- Progress Paginator -->
+            <mat-paginator
+              #progressPaginator="matPaginator"
+              [length]="progressDataSource.data.length"
+              [pageSize]="5"
+              [pageSizeOptions]="[5, 10, 25, 50]"
+              aria-label="Select page for progress data"
+              showFirstLastButtons="true">
+            </mat-paginator>
+          </div>
+
+          <!-- No Progress Data Message -->
+          <div *ngIf="progressDataSource.data.length === 0" class="alert alert-info text-center">
+            <mat-icon class="me-2">info</mat-icon>
+            No progress data available. Make sure both sessions have data loaded.
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Filters -->
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-12 col-lg-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Session</mat-label>
+                <mat-select [(ngModel)]="selectedSession" (selectionChange)="filterBySession()">
+                  <mat-option value="all">All Sessions</mat-option>
+                  <mat-option value="001">Session 001</mat-option>
+                  <mat-option value="002">Session 002</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-lg-8">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Search Students</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Enter student ID">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoadingResults" class="loading-container">
+        <mat-spinner></mat-spinner>
+        <p>Loading student session data...</p>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="isRateLimitReached" class="error-container">
+        <p>Error loading data. Please try again later.</p>
+        <p *ngIf="debugInfo.lastError">{{ debugInfo.lastError }}</p>
+        <button mat-raised-button color="primary" (click)="loadData()">Retry</button>
+      </div>
+
+      <!-- Unique-students (001 / 002) -->
+      <div class="row" *ngIf="!isLoadingResults && !isRateLimitReached">
+        <div class="col-12 col-lg-6">
+          <div class="session-section" *ngIf="selectedSession === 'all' || selectedSession === '001'">
+            <h2>Session 001 ({{ resultsLength001 }} records)</h2>
+            <div *ngIf="resultsLength001 === 0" class="no-data">
+              No data available for Session 001
+            </div>
+            <div *ngIf="resultsLength001 > 0" class="table-container mat-elevation-z2">
+              <table mat-table [dataSource]="dataSource001" class="example-table" matSort #sort001="matSort"
+                     matSortActive="studentId" matSortDirection="asc">
+                <ng-container matColumnDef="studentId">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Student Name</th>
+                  <td mat-cell *matCellDef="let row" (click)="openDialog(row.studentId, row.sessionNumber)"
+                      class="clickable-cell">{{ row.studentId }}</td>
+                </ng-container>
+                <ng-container matColumnDef="sessionNumber">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Session</th>
+                  <td mat-cell *matCellDef="let row">{{ row.sessionNumber }}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator
+                *ngIf="resultsLength001 > 0"
+                #paginator001="matPaginator"
+                [length]="resultsLength001"
+                [pageSize]="5"
+                [pageSizeOptions]="[5,10, 25, 30]"
+                aria-label="Select page for Session 001"
+                showFirstLastButtons="true">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="session-section" *ngIf="selectedSession === 'all' || selectedSession === '002'">
+            <h2>Session 002 ({{ resultsLength002 }} records)</h2>
+            <div *ngIf="resultsLength002 === 0" class="no-data">
+              No data available for Session 002
+            </div>
+            <div *ngIf="resultsLength002 > 0" class="table-container mat-elevation-z2">
+              <table mat-table [dataSource]="dataSource002" class="example-table" matSort #sort002="matSort"
+                     matSortActive="studentId" matSortDirection="asc">
+                <ng-container matColumnDef="studentId">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Student Name</th>
+                  <td mat-cell *matCellDef="let row" (click)="openDialog(row.studentId, row.sessionNumber)"
+                      class="clickable-cell">{{ row.studentId }}</td>
+                </ng-container>
+                <ng-container matColumnDef="sessionNumber">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Session</th>
+                  <td mat-cell *matCellDef="let row">{{ row.sessionNumber }}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator
+                *ngIf="resultsLength002 > 0"
+                #paginator002="matPaginator"
+                [length]="resultsLength002"
+                [pageSize]="5"
+                [pageSizeOptions]="[5,10, 25, 30]"
+                aria-label="Select page for Session 002"
+                showFirstLastButtons="true">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session Results (0001 / 0002) -->
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <mat-card class="mt-4 border border-primary">
+            <mat-card-title class="m-2">Session 001 Results</mat-card-title>
+            <mat-card-content>
+              <table mat-table [dataSource]="session0001DataSource" class="mat-elevation-z2 w-100">
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Student Name</th>
+                  <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="marks">
+                  <th mat-header-cell *matHeaderCellDef>Marks</th>
+                  <td mat-cell *matCellDef="let element">{{ element.marks }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['name', 'marks']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['name', 'marks']"></tr>
+              </table>
+
+              <!-- important: reference matches ViewChild('paginator0001') -->
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" #paginator0001 showFirstLastButtons></mat-paginator>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <mat-card class="mt-4 border border-warning">
+            <mat-card-title class="m-2">Session 002 Results</mat-card-title>
+            <mat-card-content>
+              <table mat-table [dataSource]="session0002DataSource" class="mat-elevation-z2 w-100">
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Student Name</th>
+                  <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="marks">
+                  <th mat-header-cell *matHeaderCellDef>Marks</th>
+                  <td mat-cell *matCellDef="let element">{{ element.marks }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['name', 'marks']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['name', 'marks']"></tr>
+              </table>
+
+              <!-- important: reference matches ViewChild('paginator0002') -->
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" #paginator0002 showFirstLastButtons></mat-paginator>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-data-chart></app-data-chart>
+
+  <!-- <button (click)="downloadResultsJson()">Download JSON</button> -->
+</div>

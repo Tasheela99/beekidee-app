@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.row.h-100 {
+  margin: 0;
+  padding: 0;
+}
+
+.col-12, .col-md-6 {
+  margin: 0;
+  padding: 0;
+}
+
+.full-page {
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Comic Neue', cursive;
+  background: linear-gradient(90deg, #6EC207 0%, #FFEB00 100%);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transform-origin: top left;
+  overflow-y: auto;
+}
+
+.login-card {
+  width: 90%;
+  max-width: 500px;
+  min-width: 300px;
+  padding: 20px;
+  border-radius: 15px !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 4px solid #FFD700;
+  animation: bounce 2s infinite alternate;
+}
+
+.branding-column {
+  background-image: url(/assets/images/right-image.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+
+.header-text {
+  font-size: 30px !important;
+  font-weight: 700 !important;
+  color: #FF6B6B !important;
+  text-align: center !important;
+  width: 100%;
+  margin-bottom: 10px !important;
+  text-shadow: 2px 2px 0px #FFD700;
+}
+
+.intro-text {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Comic Neue', cursive;
+}
+
+mat-card-header {
+  text-align: center;
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100% !important;
+  margin-bottom: 1rem !important;
+  font-family: 'Comic Neue', cursive !important;
+  /* Match sign-up page padding for wider appearance */
+  padding: 0 3em !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  background-color: #FFF9C4 !important;
+  border-radius: 15px !important;
+  border: 2px solid #FFA500 !important;
+  padding: 0 1.5em !important; /* Increased internal padding to match sign-up width */
+  width: 100% !important;
+  box-sizing: border-box !important; /* Ensure padding doesn't overflow */
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #FF6B6B !important;
+}
+
+.mat-form-field-label {
+  color: #45B7D1 !important;
+  font-weight: 700 !important;
+}
+
+.mat-input-element,
+.mat-select-value {
+  font-size: 16px !important;
+  color: #333 !important;
+  font-family: 'Comic Neue', cursive !important;
+  width: 100% !important;
+  box-sizing: border-box !important; /* Ensure padding is included in width */
+}
+
+.icon {
+  color: #3d3d3d !important;
+  font-size: 24px !important;
+}
+
+.mat-form-field-suffix {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.login-btn {
+  background-color: #FF9F43 !important;
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  padding: 12px !important;
+  border-radius: 12px !important;
+  border: 3px solid #FFD700 !important;
+  box-shadow: 0 2px 0 #FF7F00 !important;
+  transition: all 0.2s !important;
+  margin-top: 1rem !important;
+  width: 100% !important;
+  min-width: 200px !important;
+  display: inline-block !important;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 0 #FF7F00 !important;
+}
+
+.login-btn:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #FF7F00 !important;
+}
+
+.register-btn {
+  background-color: #4ECDC4 !important;
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  padding: 12px !important;
+  border-radius: 12px !important;
+  border: 3px solid #45B7D1 !important;
+  box-shadow: 0 2px 0 #36A2B7 !important;
+  transition: all 0.2s !important;
+  width: 100% !important;
+  min-width: 200px !important;
+  display: inline-block !important;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 0 #36A2B7 !important;
+}
+
+.register-btn:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 2px 0 #36A2B7 !important;
+}
+
+mat-spinner {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin-right: 10px !important;
+}
+
+@media (max-width: 767.98px) {
+  .full-page {
+    background: linear-gradient(90deg, #6EC207 0%, #FFEB00 100%) !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .login-card {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    margin: 20px 0 !important;
+  }
+
+  .branding-column {
+    display: none !important;
+  }
+
+  .mat-form-field {
+    margin-right: 0 !important;
+    margin-bottom: 1rem !important;
+    padding: 0 2em !important; /* Adjusted for mobile */
+  }
+}
+
+@media (max-width: 575.98px) {
+  .login-card {
+    width: 95% !important;
+    padding: 15px !important;
+  }
+
+  .header-text {
+    font-size: 24px !important;
+  }
+
+  .login-btn,
+  .register-btn {
+    min-width: 180px !important;
+  }
+}

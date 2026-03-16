@@ -1,0 +1,437 @@
+// Variables
+$primary-color: #ff6b6b;
+$secondary-color: #4ecdc4;
+$accent-color: #ffe66d;
+$success-color: #51cf66;
+$warning-color: #ff8787;
+$text-color: #2d3748;
+$bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$card-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+$text-dark: #333;
+$text-light: #666;
+$white: #fff;
+$light-bg: #F8FBFF;
+$border-color: #E8F4FD;
+
+// Mixins
+@mixin button-hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+@mixin transition-smooth {
+  transition: all 0.3s ease;
+}
+
+@mixin floating-animation($duration: 3s, $delay: 0s) {
+  animation: float $duration ease-in-out infinite $delay;
+}
+
+@mixin gradient-bg($color1, $color2) {
+  background: linear-gradient(135deg, $color1 0%, $color2 100%);
+}
+
+@mixin box-shadow-soft($color: rgba(0, 0, 0, 0.1)) {
+  box-shadow: 0 6px 15px $color;
+}
+
+// Keyframes
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes celebrate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+// Main container
+.signup-container {
+  min-height: 100vh;
+  background: $bg-gradient;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  z-index: 1;
+
+  &.celebrate {
+    animation: celebrate 1s ease-in-out;
+  }
+}
+
+// Floating elements
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+
+  .cloud {
+    position: absolute;
+    font-size: 2rem;
+    @include floating-animation(4s);
+
+    &.cloud-1 { top: 10%; left: 10%; animation-delay: 0s; }
+    &.cloud-2 { top: 20%; right: 15%; animation-delay: 1s; }
+    &.cloud-3 { bottom: 30%; left: 20%; animation-delay: 2s; }
+  }
+
+  .star {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: sparkle 2s ease-in-out infinite;
+
+    &.star-1 { top: 15%; right: 10%; animation-delay: 0.5s; }
+    &.star-2 { bottom: 20%; right: 20%; animation-delay: 1.5s; }
+    &.star-3 { top: 60%; left: 5%; animation-delay: 2.5s; }
+  }
+
+  .balloon {
+    position: absolute;
+    font-size: 2rem;
+    @include floating-animation(5s);
+
+    &.balloon-1 { top: 30%; right: 5%; animation-delay: 1s; }
+    &.balloon-2 { bottom: 40%; left: 8%; animation-delay: 3s; }
+  }
+}
+
+// Main card
+.signup-card {
+  background: rgba(rgb(255, 251, 244), 0.95);
+  border-radius: 30px;
+  box-shadow: $card-shadow;
+  padding: 30px;
+  max-width: 650px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+    animation: wiggle 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+// Header
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+
+  .mascot {
+    position: relative;
+    margin-bottom: 15px;
+
+    &-animal {
+      font-size: 4rem;
+      animation: bounce 2s ease-in-out infinite;
+      display: inline-block;
+      z-index: 3;
+    }
+  }
+
+  .title {
+    font-size: 2.5rem;
+    color: $primary-color;
+    margin: 0;
+    font-weight: bold;
+
+    .letter {
+      display: inline-block;
+      animation: bounce 1s ease-in-out infinite;
+    }
+  }
+}
+
+// Form
+.signup-form {
+  &.shake {
+    animation: shake 0.5s ease-in-out;
+  }
+}
+
+.form-group {
+  margin-bottom: 15px; // Match sign-in margin
+  position: relative;
+  animation: slideInUp 0.6s ease-out; // Match sign-in animation
+  animation-fill-mode: both;
+
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.4s; }
+
+  label {
+    display: block; // Match sign-in label display
+    margin-bottom: 5px; // Match sign-in margin
+    color: $text-dark; // Match sign-in text color
+    font-weight: bold; // Match sign-in font weight
+    font-size: 1rem; // Match sign-in font size
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center; // Match sign-in input wrapper
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 20px; // Match sign-in padding
+    border: 2px solid $border-color; // Match sign-in border
+    border-radius: 15px; // Match sign-in radius
+    font-size: 1rem; // Match sign-in font size
+    font-family: 'Nunito', sans-serif; // Match sign-in font family
+    background: $light-bg; // Match sign-in background
+    @include transition-smooth(); // Match sign-in transition
+    outline: none;
+    padding-left: 50px;
+
+    &:focus {
+      border-color: $secondary-color; // Match sign-in focus border
+      background: $white; // Match sign-in focus background
+      box-shadow: 0 0 0 3px rgba($secondary-color, 0.1); // Match sign-in focus shadow
+      transform: translateY(-2px); // Match sign-in focus transform
+    }
+
+    &.has-icon {
+      padding-left: 50px;// Match sign-in padding with icon
+    }
+
+    &::placeholder {
+      color: #999; // Match sign-in placeholder color
+    }
+  }
+
+  .input-icon {
+    position: absolute;
+    left: 15px; // Match sign-in icon position
+    color: #999; // Match sign-in icon color
+    font-size: 1.1rem; // Match sign-in icon size
+    pointer-events: none;
+  }
+}
+
+.password-container {
+  position: relative;
+
+  .password-toggle {
+    position: absolute;
+    right: 15px; // Match sign-in toggle position
+    color: #999; // Match sign-in toggle color
+    cursor: pointer;
+    font-size: 1.1rem; // Match sign-in toggle size
+    @include transition-smooth(); // Match sign-in transition
+
+    &:hover {
+      color: $secondary-color; // Match sign-in hover color
+    }
+  }
+}
+
+.error-message {
+  color: $warning-color;
+  font-size: 0.8rem; // Match sign-in error font size
+  margin-top: 3px; // Match sign-in error margin
+}
+
+// Submit button
+.signup-button {
+  width: 100%;
+  padding: 12px; // Match login-btn padding
+  @include gradient-bg(red, blue); // Match login-btn gradient
+  border: none;
+  border-radius: 20px; // Match login-btn radius
+  color: white;
+  font-size: 1.2rem; // Match login-btn font size
+  font-weight: 700; // Match login-btn font weight
+  cursor: pointer;
+  @include transition-smooth(); // Match login-btn transition
+  @include box-shadow-soft(rgba($primary-color, 0.3)); // Match login-btn shadow
+  font-family: 'Nunito', sans-serif; // Match login-btn font family
+  margin-bottom: 15px; // Match login-btn margin
+  animation-delay: 0.4s; // Match login-btn animation delay
+
+  &:hover:not(:disabled) {
+    transform: translateY(-3px); // Match login-btn hover effect
+    @include box-shadow-soft(rgba($primary-color, 0.4)); // Match login-btn hover shadow
+  }
+
+  &:active {
+    transform: translateY(0); // Match login-btn active effect
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none; // Match login-btn disabled state
+  }
+
+  .button-text {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+// Sign in link
+.signin-link {
+  text-align: center;
+  margin-top: 15px;
+
+  p {
+    color: $text-color;
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+
+.signin-button {
+  color: $secondary-color;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 15px;
+
+  &:hover {
+    background: rgba(78, 205, 196, 0.1);
+    text-decoration: underline blue 1px;
+    transform: translateY(-2px);
+  }
+
+  .icon {
+    margin-right: 5px;
+  }
+}
+
+// Footer
+.footer-decoration {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px dashed rgba(0, 0, 0, 0.1);
+}
+
+.rainbow {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  @include floating-animation(4s, 1s);
+}
+
+.footer-text {
+  color: $text-color;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+// Tablet responsive design
+@media (max-width: 768px) {
+  .signup-container {
+    padding: 15px;
+  }
+
+  .signup-card {
+    padding: 25px 20px;
+    max-width: 90%;
+    border-radius: 25px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .mascot-animal {
+    font-size: 3rem;
+  }
+
+  .form-input {
+    padding: 10px 15px; // Match sign-in responsive padding
+    font-size: 0.9rem; // Match sign-in responsive font size
+  }
+
+  .signup-button {
+    padding: 10px; // Match responsive padding
+    font-size: 1.1rem;
+  }
+
+  .floating-elements {
+    .cloud, .balloon {
+      font-size: 1.5rem;
+    }
+
+    .star {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Large tablet optimization
+@media (min-width: 769px) and (max-width: 1024px) {
+  .signup-card {
+    max-width: 700px;
+    padding: 40px;
+  }
+
+  .form-input {
+    padding: 15px 20px; // Match sign-in responsive padding
+    font-size: 1.1rem; // Match sign-in responsive font size
+  }
+
+  .signup-button {
+    padding: 15px; // Match responsive padding
+    font-size: 1.3rem;
+  }
+}
+
+// Touch-friendly enhancements
+@media (hover: none) {
+  .form-input:focus {
+    transform: none;
+  }
+
+  .signup-button:active {
+    transform: scale(0.98);
+  }
+
+  .signin-button:active {
+    transform: scale(0.95);
+  }
+}

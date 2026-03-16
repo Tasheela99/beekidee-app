@@ -1,0 +1,67 @@
+<mat-toolbar class="toolbar">
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>
+    <img src="https://firebasestorage.googleapis.com/v0/b/beekideeapp.appspot.com/o/beekidee-logo.png?alt=media&token=c753b18f-73ab-478b-ad89-de9b83fb4eea"
+         alt="BeeKideeLogo"
+         width="80px">
+  </span>
+  <span class="example-spacer"></span>
+  <button mat-raised-button (click)="logout()">
+    <mat-icon style="margin-right: 8px;">logout</mat-icon>
+    Logout
+  </button>
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened="true">
+    <div class="sidebar-header">
+      <h3>Dashboard</h3>
+      <p>Welcome to BeeKidee</p>
+    </div>
+    <mat-list>
+      <mat-list-item routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+        <button class="w-100 d-flex align-items-center justify-content-start"
+                mat-button
+                routerLink="/console/admin/dashboard/overview"
+                (click)="goToOverview()">
+          <mat-icon style="margin-right: 12px; font-size: 20px;">dashboard</mat-icon>
+          Overview
+        </button>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+        <button class="w-100 d-flex align-items-center justify-content-start"
+                mat-button
+                routerLink="/console/admin/dashboard/constructivism"
+                (click)="openPopup('0ms','0ms')">
+          <mat-icon style="margin-right: 12px; font-size: 20px;">build</mat-icon>
+          Constructivism
+        </button>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+        <button class="w-100 d-flex align-items-center justify-content-start"
+                mat-button
+                routerLink="/console/admin/dashboard/constructivism-plus-attention"
+                (click)="openPopup('0ms','0ms')">
+          <mat-icon style="margin-right: 12px; font-size: 20px;">psychology</mat-icon>
+          Attention
+        </button>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+        <button class="w-100 d-flex align-items-center justify-content-start"
+                mat-button
+                routerLink="/console/admin/dashboard/lecture-material">
+          <mat-icon style="margin-right: 12px; font-size: 20px;">library_books</mat-icon>
+          Lecture Materials
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</mat-drawer-container>

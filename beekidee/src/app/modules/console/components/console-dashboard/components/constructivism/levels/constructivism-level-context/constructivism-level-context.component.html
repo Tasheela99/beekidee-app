@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row mb-4">
+    <mat-card appearance="raised" class="box w-100">
+      <mat-card-content>
+        <div class="col-12">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-4 mb-4 d-flex justify-content-center">
+              <button class="btn w-100" routerLink="/console/admin/dashboard/constructivism/pre-intermediate">
+                <span class="btn-text-one">🌱 පළමු වසර</span>
+                <span class="btn-text-two">ක්‍රියාකාරකම!</span>
+              </button>
+            </div>
+            <div class="col-12 col-lg-4 mb-4 d-flex justify-content-center">
+              <button class="btn w-100" routerLink="/console/admin/dashboard/constructivism/intermediate">
+                <span class="btn-text-one">🌸 දෙවන වසර</span>
+                <span class="btn-text-two">ක්‍රියාකාරකම!</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div style="background: rgba(255, 255, 255, 0.1); border-radius: 20px; backdrop-filter: blur(10px); min-height: 100px;">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

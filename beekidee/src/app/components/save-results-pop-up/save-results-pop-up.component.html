@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Save Game Result</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="gameResult.name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Session</mat-label>
+    <input matInput [(ngModel)]="gameResult.session">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Marks</mat-label>
+    <input matInput type="number" [(ngModel)]="gameResult.marks">
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Save</button>
+</mat-dialog-actions>

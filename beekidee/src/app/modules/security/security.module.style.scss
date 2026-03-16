@@ -1,0 +1,22 @@
+
+
+.example-form {
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+mat-label,button,p{
+  font-family: "Sour Gummy", sans-serif;
+}
+mat-card-title {
+  font-family: "Sour Gummy", sans-serif;
+  font-size: 60px;
+}
+
+@media (max-width: 478px) {
+  mat-card-title {
+    font-size: 250%;
+  }
+}

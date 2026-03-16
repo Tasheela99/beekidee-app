@@ -1,0 +1,345 @@
+// Dialog styling
+.mat-mdc-dialog-content {
+  padding: 0 24px 24px 24px !important;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.mat-mdc-dialog-title {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin: 0 -24px 24px -24px;
+  padding: 20px 24px;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 4px 4px 0 0;
+}
+
+.mat-mdc-dialog-actions {
+  justify-content: flex-end;
+  padding: 16px 24px;
+  border-top: 1px solid #e0e0e0;
+  margin: 20px -24px -24px -24px;
+}
+
+// Averages section
+.averages-container {
+  margin-bottom: 32px;
+
+  .stats-header {
+    margin-bottom: 16px;
+
+    h3 {
+      margin: 0;
+      color: #333;
+      font-size: 18px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &::before {
+        content: '';
+        width: 4px;
+        height: 18px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .mat-mdc-card-content {
+    padding: 20px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  .card-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    margin-top: 8px;
+  }
+}
+
+// Attention level colors for cards
+.high-attention {
+  background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+
+  mat-icon, .card-title, .card-value {
+    color: white;
+  }
+}
+
+.medium-attention {
+  background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+
+  mat-icon, .card-title, .card-value {
+    color: white;
+  }
+}
+
+.low-attention {
+  background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+
+  mat-icon, .card-title, .card-value {
+    color: white;
+  }
+}
+
+.very-low-attention {
+  background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+
+  mat-icon, .card-title, .card-value {
+    color: white;
+  }
+}
+
+// Posture colors for cards
+.good-posture {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+  mat-icon, .card-title, .card-value {
+    color: white;
+  }
+}
+
+.fair-posture {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+
+  mat-icon, .card-title, .card-value {
+    color: white;
+  }
+}
+
+.poor-posture {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+
+  mat-icon, .card-title, .card-value {
+    color: white;
+  }
+}
+
+// Table section
+.table-container {
+  h3 {
+    margin: 0 0 16px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &::before {
+      content: '';
+      width: 4px;
+      height: 18px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 2px;
+    }
+  }
+}
+
+.example-table {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .mat-mdc-header-cell {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #e9ecef;
+    padding: 16px 12px;
+  }
+
+  .mat-mdc-cell {
+    padding: 12px;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .mat-mdc-row {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+}
+
+// Table cell value styling
+.attention-value, .posture-value {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-block;
+  min-width: 50px;
+  text-align: center;
+
+  &.high-attention {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  &.medium-attention {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  &.low-attention {
+    background-color: #ffeaa7;
+    color: #b8860b;
+  }
+
+  &.very-low-attention {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  &.good-posture {
+    background-color: #cce7ff;
+    color: #004085;
+  }
+
+  &.fair-posture {
+    background-color: #d1ecf1;
+    color: #0c5460;
+  }
+
+  &.poor-posture {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+}
+
+.emotion-badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+
+  &.emotion-happy {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  &.emotion-sad {
+    background-color: #cce7ff;
+    color: #004085;
+  }
+
+  &.emotion-angry {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  &.emotion-neutral {
+    background-color: #e2e3e5;
+    color: #383d41;
+  }
+
+  &.emotion-surprised {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  &.emotion-fearful {
+    background-color: #f1c0f5;
+    color: #6a1b9a;
+  }
+
+  &.emotion-disgusted {
+    background-color: #ffeaa7;
+    color: #b8860b;
+  }
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-card .card-value {
+    font-size: 24px;
+  }
+
+  .example-table {
+    .mat-mdc-cell,
+    .mat-mdc-header-cell {
+      padding: 8px 6px;
+      font-size: 12px;
+    }
+  }
+
+  .mat-mdc-dialog-content {
+    padding: 0 16px 16px 16px !important;
+  }
+
+  .mat-mdc-dialog-title {
+    margin: 0 -16px 16px -16px;
+    padding: 16px;
+    font-size: 18px;
+  }
+}

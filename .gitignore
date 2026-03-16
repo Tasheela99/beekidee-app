@@ -1,0 +1,28 @@
+# Root ignore rules for this mono-folder repo
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+
+# IDE project files
+**/.idea/
+**/*.iml
+
+# VS Code user-specific settings (keep launch/tasks/extensions if you want)
+**/.vscode/settings.json
+
+# Python caches / envs
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.venv/
+**/venv/
+
+# Node / Angular build artifacts
+**/node_modules/
+**/dist/
+**/.angular/cache/
+
+# Local logs / outputs
+**/*.log
+**/console_output.txt
